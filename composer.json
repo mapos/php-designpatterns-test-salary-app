@@ -1,0 +1,40 @@
+{
+    "name": "mapos/assertis-test",
+    "description": "Generates salary and bonus.",
+    "keywords": [
+        "payroll",
+        "salary",
+        "bonus"
+    ],
+    "homepage": "http://MarcinPolak.eu",
+    "type": "cli-phar",
+    "time": "31-10-2014",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Polak",
+            "email": "mapoart@gmail.com",
+            "homepage": "http://marcinpolak.eu",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.2",
+        "symfony/process": "2.6.*@dev",
+        "symfony/console": "2.6.*@dev"
+    },
+    "autoload": {
+        "psr-4": {"": "src/"}
+    },
+    "minimum-stability": "dev",
+    "archive": {
+        "exclude": [
+            "tests",
+            "phpdox.phar",
+            "cli.php",
+            "build.xml",
+            "build"
+        ]
+    },
+    "bin": ["bin/console"]
+}

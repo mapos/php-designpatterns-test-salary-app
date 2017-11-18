@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+if (!file_exists($file = 'vendor/autoload.php')) {
+    $message = 'Install dependencies to run this script. "composer update"';
+    throw new \RuntimeException($message);
+}
+
+include $file;
+
+use Assertis\Console\Command\PayrollCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application("Assertis test by Marcin Polak mapoart@gmail.com 30.10.2014", "0.1");
+$application->add(new PayrollCommand);
+$application->run();

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="assertis" default="build">
+    <property name="dir.build" value="build"/>
+    <property name="dir.src" value="src"/>
+
+    <fileset dir="." id="maposfiles">
+        <include name="${dir.src}/**/*.php"/>
+    </fileset>
+
+    <fileset dir="." id="tests">
+        <include name="src/**/*Test.php"/>
+    </fileset>
+
+    <target name="empty" description="Trying to remove previous ${dir.build} directory.">
+        <delete dir="${dir.build}"/>
+    </target>
+
+    <target name="prepare-dirs" description="Preparing directory structure.." depends="empty">
+        <echo msg="Making directories"/>
+        <mkdir dir="${dir.build}"/>
+        <mkdir dir="${dir.build}/bin"/>
+        <mkdir dir="${dir.build}/api/"/>
+        <mkdir dir="${dir.build}/docs/"/>
+        <mkdir dir="${dir.build}/logs/"/>
+        <mkdir dir="${dir.build}/logs/coverage/"/>
+    </target>
+
+    <target name="copy-files" description="Copying files.." depends="prepare-dirs">
+        <copy todir="${dir.build}/${dir.src}">
+            <fileset dir="${dir.src}"/>
+        </copy>
+        <copy todir="${dir.build}/bin">
+            <fileset dir="bin"/>
+        </copy>
+        <copy file="composer.json" tofile="${dir.build}/composer.json" overwrite="true"/>
+    </target>
+    <target name="composer-check" depends="prepare-dirs">
+        <available file="${dir.build}/composer.phar" property="composer.present"/>
+    </target>
+    <target name="composer-download" unless="composer.present" depends="composer-check">
+        <exec executable="wget">
+            <arg value="-O${dir.build}/composer.phar"/>
+            <arg value="http://getcomposer.org/composer.phar"/>
+        </exec>
+    </target>
+    <target name="composer" depends="composer-download,prepare-dirs">
+        <exec command="php composer.phar update --no-dev" dir="${dir.build}/"/>
+        <!--<php expression="include('build/vendor/autoload.php')" />-->
+    </target>
+
+    <target name="phpdox-check">
+        <available file="phpdox.phar" property="phpdox.present"/>
+    </target>
+    <target name="phpdox-download" unless="phpdox.present" depends="phpdox-check">
+        <exec executable="wget">
+            <arg value="-Ophpdox.phar"/>
+            <arg value="http://phpdox.de/releases/phpdox.phar"/>
+        </exec>
+    </target>
+    <target name="phpdox" depends="phpdox-download">
+        <exec command="php phpdox.phar" dir="."/>
+    </target>
+
+    <target name="report" description="Code reporting tools">
+        <phplint haltonfailure="true">
+            <fileset refid="maposfiles"/>
+            <fileset refid="tests"/>
+        </phplint>
+        <phpdepend>
+            <fileset refid="maposfiles"/>
+            <logger type="jdepend-xml" outfile="${dir.build}/logs/jdepend.xml"/>
+            <logger type="jdepend-chart" outfile="${dir.build}/logs/dependencies.svg"/>
+            <logger type="overview-pyramid" outfile="${dir.build}/logs/overview-pyramid.svg"/>
+            <analyzer type="coderank-mode" value="method"/>
+        </phpdepend>
+        <phpmd>
+            <fileset refid="maposfiles"/>
+            <formatter type="xml" outfile="${dir.build}/logs/pmd.xml"/>
+        </phpmd>
+        <phpcodesniffer standard="PSR2" showSniffs="true" showWarnings="true">
+            <fileset refid="maposfiles"/>
+            <fileset refid="tests"/>
+            <formatter type="checkstyle" outfile="${dir.build}/logs/checkstyle.xml"/>
+        </phpcodesniffer>
+        <phploc reportType="csv" reportDirectory="${dir.build}/logs" reportName="phploc" countTests="true">
+            <fileset refid="maposfiles"/>
+        </phploc>
+        <phploc reportType="xml" reportDirectory="${dir.build}/logs" reportName="phplocxml" countTests="true">
+            <fileset refid="maposfiles"/>
+        </phploc>
+        <phpcpd>
+            <fileset refid="maposfiles"/>
+            <formatter type="pmd" outfile="${dir.build}/logs/pmd-cpd.xml"/>
+        </phpcpd>
+    </target>
+    <target name="phpdox" description="Generate API documentation using phpDox" depends="report">
+        <exec command="php phpdox.phar -f phpdox.xml"/>
+    </target>
+    <target name="hphpa" description="HipHop's static analyzer">
+        <exec executable="wget" checkreturn="true">
+            <arg line="https://phar.phpunit.de/hphpa.phar"/>
+        </exec>
+        <exec executable="php hphpa.phar" checkreturn="true">
+            <arg line="--checkstyle ./build/logs/checkstyle-hphpa.xml"/>
+            <arg line="${dir.src}"/>
+        </exec>
+        <delete file="hphpa.phar"/>
+    </target>
+    <!--<target name="test" description="Run unit tests" depends="composer,report,phpdox">-->
+        <!--<coverage-setup database="./build/coverage/coverage.db">-->
+            <!--<fileset refid="maposfiles"/>-->
+        <!--</coverage-setup>-->
+        <!--<phpunit haltonfailure="true" haltonerror="true" printsummary="true" pharlocation="/usr/local/bin/phpunit"-->
+                 <!--bootstrap="vendor/autoload.php"-->
+                 <!--codecoverage="true">-->
+            <!--<formatter todir="build/logs/" type="clover" outfile="clover.xml"/>-->
+            <!--<formatter todir="build/logs/" type="xml" outfile="junit.xml"/>-->
+            <!--<batchtest>-->
+                <!--<fileset dir="tests">-->
+                    <!--<include name="**/*Test*.php"/>-->
+                <!--</fileset>-->
+            <!--</batchtest>-->
+        <!--</phpunit>-->
+    <!--</target>-->
+
+
+    <target name="phpunit" description="Run unit tests using PHPUnit and generates junit.xml and clover.xml">
+        <exec executable="phpunit" checkreturn="true" dir="."/>
+    </target>
+
+    <target name="build" depends="copy-files,composer,report,phpunit,phpdox">
+
+    </target>
+
+    <target name="phar-composer-download">
+        <exec executable="wget" checkreturn="true">
+            <arg line="http://www.lueck.tv/phar-composer/phar-composer.phar"/>
+        </exec>
+    </target>
+
+    <target name="phar" depends="phar-composer-download">
+        <delete dir="build/api"/>
+        <delete dir="build/docs"/>
+        <delete dir="build/logs"/>
+        <exec command="php phar-composer.phar build ${dir.build}/" dir="."/>
+        <delete file="build/composer.json"/>
+        <delete file="build/composer.lock"/>
+        <delete file="phar-composer.phar"/>
+    </target>
+</project>

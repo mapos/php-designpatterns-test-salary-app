@@ -1,0 +1,284 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "7c93e82ba3d83b03a4d82ae58dfc3466",
+    "packages": [
+        {
+            "name": "assertis/console",
+            "version": "dev-master",
+            "target-dir": "Assertis/Console",
+            "source": {
+                "type": "git",
+                "url": "/var/www/payroll/packages/Assertis/Console",
+                "reference": "6583281bdedf6276feb2f4e5c60f3557a3ac2017"
+            },
+            "require": {
+                "assertis/payroll": "1.0.*@dev",
+                "php": ">=5.3.3",
+                "symfony/console": "2.6.*@dev",
+                "symfony/process": "2.6.*@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Assertis\\Console\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Polak",
+                    "email": "mapoart@gmail.com"
+                }
+            ],
+            "description": "Assertis console tools",
+            "homepage": "http://www.assertis.co.uk/",
+            "keywords": [
+                "console",
+                "tool"
+            ],
+            "time": "2014-11-02 21:35:20"
+        },
+        {
+            "name": "assertis/data",
+            "version": "dev-master",
+            "target-dir": "Assertis/Data",
+            "source": {
+                "type": "git",
+                "url": "/var/www/payroll/packages/Assertis/Data",
+                "reference": "0a3d3a664fce7df42f55aab6cf211f83b6afa90f"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Assertis\\Data\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Polak",
+                    "email": "mapoart@gmail.com"
+                }
+            ],
+            "description": "Assertis data library",
+            "homepage": "http://www.assertis.co.uk/",
+            "keywords": [
+                "data"
+            ],
+            "time": "2014-11-03 06:29:00"
+        },
+        {
+            "name": "assertis/payroll",
+            "version": "dev-master",
+            "target-dir": "Assertis/Payroll",
+            "source": {
+                "type": "git",
+                "url": "/var/www/payroll/packages/Assertis/Payroll",
+                "reference": "26ae4c17420d37890fb8f03970d4923f9f89842b"
+            },
+            "require": {
+                "assertis/data": "1.0.*@dev",
+                "assertis/storage": "1.0.*@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Assertis\\Payroll\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Polak",
+                    "email": "mapoart@gmail.com"
+                }
+            ],
+            "description": "Assertis payroll library - assertis test",
+            "homepage": "http://www.assertis.co.uk/",
+            "keywords": [
+                "data"
+            ],
+            "time": "2014-11-02 20:44:07"
+        },
+        {
+            "name": "assertis/storage",
+            "version": "dev-master",
+            "target-dir": "Assertis/Storage",
+            "source": {
+                "type": "git",
+                "url": "/var/www/payroll/packages/Assertis/Storage",
+                "reference": "a8e08654692c1bae76f52cfd019b4af696ad089d"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Assertis\\Storage\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Polak",
+                    "email": "mapoart@gmail.com"
+                }
+            ],
+            "description": "Assertis storage library",
+            "homepage": "http://www.assertis.co.uk/",
+            "keywords": [
+                "data"
+            ],
+            "time": "2014-11-02 20:44:21"
+        },
+        {
+            "name": "symfony/console",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Console",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "2fc3644d2e10e14935b2c79e57a5185281eb1eb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/2fc3644d2e10e14935b2c79e57a5185281eb1eb7",
+                "reference": "2fc3644d2e10e14935b2c79e57a5185281eb1eb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-11-03 03:55:50"
+        },
+        {
+            "name": "symfony/process",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Process",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Process.git",
+                "reference": "2f0db541a7de08dbe5a4b55acfbaf8e3e6b029d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/2f0db541a7de08dbe5a4b55acfbaf8e3e6b029d9",
+                "reference": "2f0db541a7de08dbe5a4b55acfbaf8e3e6b029d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Process\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-10-01 05:53:11"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "platform": {
+        "php": ">=5.6.2"
+    },
+    "platform-dev": []
+}

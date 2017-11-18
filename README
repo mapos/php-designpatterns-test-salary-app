@@ -1,0 +1,52 @@
+-------------------------------------
+README file for Assertis Ltd test
+-------------------------------------
+
+Author: Marcin Polak mapoart@gmail.com
+Date: 30.10.2014
+
+INSTRUCTIONS OF THE TEST:
+
+Fictional company is handling their sales payroll in the following way:
+
+Sales staff get a regular monthly fixed base salary and a monthly bonus.
+- The base salaries are paid on the last day of the month unless that day is a Saturday or a
+Sunday (weekend).
+- On the 15th of every month bonuses are paid for the previous month, unless that day is a weekend. In that case,
+they are paid the first Wednesday after the 15th.
+- The output of the utility should be a CSV file, containing the payment dates for the remainder of
+this year. The CSV file should contain a column for the month name, a column that contains the salary payment date
+for that month, and a column that contains the bonus payment date.
+
+APPLICATION:
+
+Application uses symfony/console for cli handling. It is automatically installed by the composer.
+
+Please follow the instructions below for the installation (assume that you are in the root folder of the application):
+
+INSTALLATION:
+
+    curl:
+        sudo apt-get install curl #installation of curl for composer installation
+    composer:
+        curl -sS https://getcomposer.org/installer | php #install composer to the main dir of the project
+        php composer.phar install #install all dependencies
+        update:
+            php composer.phar self-update #update the composer automatically
+
+UNIT TESTING:
+
+    installation:
+        sudo apt-get install phpunit #installation for phpunit
+    run:
+        phpunit #in the main directory
+        OR
+        vendor/bin/phpunit #using phpunit installed by composer / please add php unit to composer.json to do this way
+
+
+RUN EXAMPLES:
+    example:
+        ./assertis-test.phar payroll:generate
+        ./assertis-test.phar payroll:generate --year=2015
+        ./assertis-test.phar payroll:generate --year=2016 --filename=my2016.csv
+

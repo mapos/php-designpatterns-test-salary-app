@@ -1,0 +1,9 @@
+/build/
+/vendor/
+/.idea/
+composer.phar
+build
+phpdox.phar
+phar-composer.phar
+*.csv
+packages

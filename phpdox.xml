@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpdox xmlns="http://phpdox.net/config">
+    <project name="Assertis Test - Marcin Polak mapoart@gmail.com 31.10.2014" source="${basedir}/src" workdir="${basedir}/build/api/xml">
+        <collector backend="parser"/>
+        <generator output="${basedir}/build/api">
+
+            <enrich base="${basedir}/build">
+                <source type="build"/>
+                <source type="git">
+                    <history enabled="true" limit="15" />
+                </source>
+                <source type="phpcs">
+                    <file name="logs/checkstyle.xml"/>
+                </source>
+                <source type="phploc">
+                    <file name="logs/phploc.xml"/>
+                </source>
+                <source type="pmd">
+                    <file name="logs/pmd.xml"/>
+                </source>
+                <source type="checkstyle">
+                    <file name="logs/checkstyle.xml"/>
+                </source>
+                <source type="phpunit">
+                    <coverage path="logs/coverage/xml" />
+                </source>
+            </enrich>
+
+            <build engine="html" enabled="true" output="html">
+                <template dir="${phpDox.home}/templates/html" />
+                <file extension="xhtml" />
+            </build>
+
+            <build engine="xml" enabled="true" output="xml" />
+        </generator>
+    </project>
+</phpdox>

@@ -1,0 +1,33 @@
+{
+    "name": "assertis/console",
+    "type": "library",
+    "description": "Assertis console tools",
+    "keywords": [
+        "tool",
+        "console"
+    ],
+    "homepage": "http://www.assertis.co.uk/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Polak",
+            "email": "mapoart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/process": "2.6.*@dev",
+        "symfony/console": "2.6.*@dev",
+        "assertis/payroll": "1.0.*@dev"
+    },
+    "target-dir": "Assertis/Console",
+    "autoload": {
+        "psr-0": {"Assertis\\Console\\": ""}
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "name": "assertis/data",
+    "type": "library",
+    "description": "Assertis data library",
+    "keywords": ["data"],
+    "homepage": "http://www.assertis.co.uk/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Polak",
+            "email": "mapoart@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "target-dir": "Assertis/Data",
+    "autoload": {
+        "psr-0": { "Assertis\\Data\\": "" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
